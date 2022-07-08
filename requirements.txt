@@ -1,0 +1,7 @@
+distlib==0.3.4
+filelock==3.7.1
+platformdirs==2.5.2
+python-decouple==3.6
+six==1.16.0
+virtualenv==20.15.1
+virtualenvwrapper-win==1.2.7
