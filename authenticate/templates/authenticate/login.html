@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-lg-5"></div>
+        <div class="col-sm-6 col-md-4 col-lg-2 text-center border p-3">
+            <form>
+                <h5 class="font-monospace text-secondary">Login</h5>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Usuário">
+                </div>
+                <div class="mb-3">
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Senha">
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark ">Entrar</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-5"></div>
+    </div>
+
+{% endblock %}  
+
