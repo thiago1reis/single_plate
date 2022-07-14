@@ -11,18 +11,22 @@
                 <div class="border border-secondary rounded m-5 mb-0 pb-5">
                     <nav class="navbar navbar-expand-lg navbar-secondary bg-secondary mb-5 ">
                         <div class="container-fluid">
-                            <a class="navbar-brand font-monospace text-uppercase fs-6 fw-bold" href="#">Departamento de Trânsito</a>
+                            {% if not user.is_authenticated %}
+                                <a class="navbar-brand font-monospace text-uppercase fs-6 fw-bold" href="#">Departamento de Trânsito</a>
+                            {% endif %}
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav">
-                                    <a class="nav-link " aria-current="page" href="#">Menu 1</a>
-                                    <a class="nav-link" href="#">Menu 2</a>
-                                    <a class="nav-link" href="#">Menu 3</a>
-                                    <a class="nav-link" href="#">Menu 4</a>
-                                    <a class="nav-link" href="#">Menu 5</a>
-                                   
+                                    {% if user.is_authenticated %}
+                                        <a class="nav-link " aria-current="page" href="#">Menu 1</a>
+                                        <a class="nav-link" href="#">Menu 2</a>
+                                        <a class="nav-link" href="#">Menu 3</a>
+                                        <a class="nav-link" href="#">Menu 4</a>
+                                        <a class="nav-link" href="#">Menu 5</a>
+                                        {{ user.get_username }}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
