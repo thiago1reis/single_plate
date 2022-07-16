@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_system
+from django.contrib.auth import logout as logout_system
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 
-# Create your views here.
+# Função para fazer login.
 def login(request):
     if request.method == "GET":
         return render(request, 'authenticate/login.html')
@@ -17,15 +18,19 @@ def login(request):
         user = authenticate(username=authUsername, password=authPassword)
         if user is not None:
             login_system(request, user)
-           
-            return redirect('login')
+            return redirect('sistema')
         else:
             return HttpResponse('Email ou Senha Inválidos')
 
 
 @login_required(login_url="/")
 def sistema(request):
-    return HttpResponse('Bem vindo ao painel de controle!')
+    return render(request, 'authenticate/painel.html')
+
+
+def logout(request):
+    logout_system(request)
+    return redirect('login')
     
 
 
