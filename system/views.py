@@ -4,3 +4,6 @@ from django.shortcuts import HttpResponse
 
 def owner_index(request):
     return HttpResponse('lista dos propietarios')
+
+def owner_add(request):
+    return HttpResponse('lista dos propietarios')

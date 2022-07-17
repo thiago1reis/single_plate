@@ -5,6 +5,6 @@ from . import views
 
 urlpatterns = [
     path('propietarios', views.owner_index, name='owner_index'),   
-    # path('sistema', views.sistema, name="sistema"),
+    path('propietario/novo', views.owner_add, name="owner_add"),
     # path('logout', views.logout, name="logout"),
 ] 

@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-5"></div>
         <div class="col-sm-6 col-md-4 col-lg-2 text-center border p-3">
+            {% include 'alert.html' %}
             <form action="{% url 'login' %}" method="POST">  
                 {% csrf_token %}
                 <h5 class="font-monospace text-secondary">Login</h5>

@@ -1,12 +1,13 @@
 from http.client import HTTPResponse
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from django.shortcuts import HttpResponse
+#from django.shortcuts import HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as login_system
 from django.contrib.auth import logout as logout_system
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
+from django.contrib import messages
 
 # Função para fazer login.
 def login(request):
@@ -20,8 +21,9 @@ def login(request):
             login_system(request, user)
             return redirect('sistema')
         else:
-            return HttpResponse('Email ou Senha Inválidos')
-
+            messages.error(request, 'Usuário ou senha inválidos!')
+            return redirect('login')
+            
 
 @login_required(login_url="/")
 def sistema(request):
