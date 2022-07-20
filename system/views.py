@@ -6,4 +6,4 @@ def owner_index(request):
     return HttpResponse('lista dos propietarios')
 
 def owner_add(request):
-    return HttpResponse('lista dos propietarios')
+    return render(request, 'system/owner_add.html')
