@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="border p-3 m-3">
+        <form action="" method="POST">  
+                {% csrf_token %}
+                <h5 class="font-monospace text-secondary text-center mb-3">Adicionar Propietário</h5>
+                <div class="row">
+                    {% include 'alert.html' %}
+                    <div class="col-sm-4 mb-3">
+                        <label for="nome" class="form-label">Nome: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Informe o nome">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="nome" class="form-label">Data de nascimento: <span class="text-danger fw-bold">*</span></label>
+                        <input type="date" class="form-control" id="birth_date" name="birth_date">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="sex" class="form-label">Sexo: <span class="text-danger fw-bold">*</span></label><br>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="inlineRadio1" value="Feminino">
+                            <label class="form-check-label" for="inlineRadio1">Feminino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="inlineRadio2" value="Masculino">
+                            <label class="form-check-label" for="inlineRadio2">Masculino</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sex" id="inlineRadio3" value="Outros" >
+                            <label class="form-check-label" for="inlineRadio3">Outros</label>
+                        </div><br>
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="cpf" class="form-label">CPF: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="Informe o CPF">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="telephone" class="form-label">Telefone:</label>
+                        <input type="text" class="form-control" id="telephone" name="telephone" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@email.com">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="CEP" class="form-label">CEP: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="zip_code" name="zip_code" placeholder="00000-000">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="CEP" class="form-label">Estado: <span class="text-danger fw-bold">*</span></label>
+                        <select class="form-select"  id="state" name="state">
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="Tocantins">Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="city" class="form-label">Cidade: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="city" name="city" placeholder="Informe a cidade">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="district" class="form-label">Bairro: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="district" name="district" placeholder="Informe o bairro">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="road" class="form-label">Rua: <span class="text-danger fw-bold">*</span></label>
+                        <input type="text" class="form-control" id="road" name="road" placeholder="Informe a rua">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="number" class="form-label">Número:</label>
+                        <input type="text" class="form-control" id="number" name="number" placeholder="Informe o numero da casa">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="complement" class="form-label">Complemento:</label>
+                        <input type="text" class="form-control" id="complement" name="complement" placeholder="Informe o Complemento">
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="reference_point" class="form-label">Ponte de referência:</label>
+                        <input type="text" class="form-control" id="reference_point" name="reference_point" placeholder="Informe um ponte de referência">
+                    </div>
+                    <div class="col-sm-12 mb-3">
+                        <label for="comments" class="form-label">Observações:</label>
+                        <textarea class="form-control" id="comments" name="comments" style="height: 100px"></textarea>
+                    </div>
+                </div>
+                <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-dark ">Salvar</button>
+                </div> 
+        </form>
+    </div>
+{% endblock %}  
