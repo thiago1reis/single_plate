@@ -1,17 +1,20 @@
 {% extends 'base.html' %}
+{% comment %} {% load crispy_forms_tags %} {% endcomment %}
 {% block content %}
     <div class="border p-3 m-3">
-        <form action="" method="POST">  
+        <form action="{% url 'owner_add' %}" method="POST">  
                 {% csrf_token %}
                 <h5 class="font-monospace text-secondary text-center mb-3">Adicionar Propietário</h5>
-                <div class="row">
-                    {% include 'alert.html' %}
+                {% include 'alert.html' %}
+                 <div class="row">
                     <div class="col-sm-4 mb-3">
                         <label for="nome" class="form-label">Nome: <span class="text-danger fw-bold">*</span></label>
+                        {% comment %} {{ form.name|as_crispy_field }} {% endcomment %}
                         <input type="text" class="form-control" id="name" name="name" placeholder="Informe o nome">
                     </div>
                     <div class="col-sm-4 mb-3">
                         <label for="nome" class="form-label">Data de nascimento: <span class="text-danger fw-bold">*</span></label>
+                        {% comment %} {{ form.birth_date|as_crispy_field }} {% endcomment %}
                         <input type="date" class="form-control" id="birth_date" name="birth_date">
                     </div>
                     <div class="col-sm-4 mb-3">
@@ -80,7 +83,7 @@
                         <label for="comments" class="form-label">Observações:</label>
                         <textarea class="form-control" id="comments" name="comments" style="height: 100px"></textarea>
                     </div>
-                </div>
+                </div> 
                 <div class="d-grid gap-3 d-md-flex justify-content-md-end">
                     <button type="submit" class="btn btn-dark ">Salvar</button>
                 </div> 

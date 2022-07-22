@@ -14,22 +14,28 @@ def login(request):
     if request.method == "GET":
         return render(request, 'authenticate/login.html')
     else:
-        authUsername = request.POST.get('username')
-        authPassword = request.POST.get('password')
-        user = authenticate(username=authUsername, password=authPassword)
-        if user is not None:
-            login_system(request, user)
-            return redirect('sistema')
-        else:
-            messages.error(request, 'Usuário ou senha inválidos!')
+        try:
+            authUsername = request.POST.get('username')
+            authPassword = request.POST.get('password')
+            user = authenticate(username=authUsername, password=authPassword)
+            if user is not None:
+                login_system(request, user)
+                return redirect('sistema')
+            else:
+                messages.error(request, 'Usuário ou senha inválidos!')
+                return redirect('login')
+        except Exception as error:
+            messages.error(request, error)
             return redirect('login')
-            
 
+
+# Função para direcionar ao painel do sistema.     
 @login_required(login_url="/")
 def sistema(request):
     return render(request, 'authenticate/painel.html')
 
 
+# Função para fazer logout.
 def logout(request):
     logout_system(request)
     return redirect('login')
