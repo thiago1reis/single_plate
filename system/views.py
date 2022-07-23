@@ -1,64 +1,40 @@
+from cmath import e
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
-from system.models import Address, Owner
+from django.contrib.auth.decorators import login_required
+from system.forms import OwnerForm
+from system.models import Owner
 # Create your views here.
 
 # Função para listar todos os propietários.
+@login_required(login_url="/")
 def owner_index(request):
-    return HttpResponse('lista dos propietarios')
-
+    owners = Owner.objects.all()
+    context = {
+        'owners': owners
+    }
+    return render(request, 'system/owner_index.html', context)
 
 # Função para adicionar novos propietários.
+@login_required(login_url="/")
 def owner_add(request):
-    if request.method == "GET":
-        return render(request, 'system/owner_add.html')
-    else:
-        try:
-            number = ""
-            complement = ""
-            reference_point = ""
-            if request.POST.get('number'): number =  request.POST.get('number')  
-            if request.POST.get('complement'): complement =  request.POST.get('number')  
-            if request.POST.get('reference_point'): reference_point =  request.POST.get('reference_point') 
-
-            address = Address.objects.create(
-                zip_code = request.POST.get('zip_code'),
-                state = request.POST.get('state'),
-                city = request.POST.get('city'),
-                district = request.POST.get('district'),
-                road = request.POST.get('road'),
-                number = number,
-                complement = complement,
-                reference_point = reference_point
-            )
-
-            email = "",
-            telephone = "",
-            comments = "",
-            if request.POST.get('email'): email =  request.POST.get('email')  
-            if request.POST.get('telephone'): telephone =  request.POST.get('telephone')  
-            if request.POST.get('comments'): comments =  request.POST.get('comments') 
-
-            Owner.objects.create(
-                name = request.POST.get('name'),
-                birth_date =request.POST.get('birth_date'),
-                sex = request.POST.get('sex'),
-                cpf = request.POST.get('cpf'),
-                telephone = telephone,
-                email = email,
-                comments = comments,
-                address_id = address.id
-            ) 
-            messages.success(request, 'Propietário adicionado com sucesso!')
-            return redirect('owner_add')
-        except Exception as error:
-            messages.error(request, error)
-            return redirect('owner_add')
+    form = OwnerForm(request.POST or None)
+    try:
+        if request.POST:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Propietário adicionado com sucesso!')
+                return redirect('owner_index')
+    except Exception as error:
+        messages.error(request, error)
+        return redirect('owner_add')
+    context = {'form': form }
+    return render(request, 'system/owner_add.html', context)
 
 
-# Função para editar um propietários.
+# #Função para editar um propietários.
 # def owner_index(request):
 #     return HttpResponse('lista dos propietarios')
 
