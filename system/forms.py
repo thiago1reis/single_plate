@@ -7,7 +7,7 @@ class OwnerForm(forms.ModelForm):
         exclude = ('created', 'modified', 'address_id')
         widgets = {
             'name': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe o nome' ,'autofocus': ''}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'dd/mm/aaaa'}), 
+            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date',}), 
             'sex': forms.Select(attrs={'class': 'form-select'}),
             'cpf': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe o CPF'}),
             'telephone': forms.TextInput( attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000'}),

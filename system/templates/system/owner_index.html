@@ -15,20 +15,34 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for owner in owners %}
+                {% for owner in page_obj %}
                   <tr>
-                    <td>{{ owner.name }}</td>
-                    <td>{{ owner.birth_date }}</td>
+                    <td>{{ owner.name }}</td> 
+                    <td>{{ owner.birth_date|date:"d/m/Y" }}</td>
                     <td>{{ owner.sex }}</td>
                     <td>{{ owner.cpf }}</td>
                     <td class="">
-                        <a href="" class="me-3 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>
-                        <a href="" class="me-3 text-dark"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="" class="me-4 text-dark"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{% url 'owner_edit' owner.id %}" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
+                        <a href="{% url 'owner_delete' owner.id %}" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir esse Propietário ?')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                   </tr>
                 {% endfor %}
                 </tbody>
-              </table>
+             </table>
           </div>
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination ">
+              {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+              {% endif %}
+                <li class="page-item disabled"><span class="page-link text-secondary" >Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+              {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></li>
+              {% endif %}
+            </ul>
+          </nav>
     </div>
 {% endblock %}  

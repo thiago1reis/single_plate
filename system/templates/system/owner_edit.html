@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% block content %}
+    <div class="border p-3 m-3">
+        <form action="{% url 'owner_edit' owner %}" method="POST">  
+                {% csrf_token %}
+                <h5 class="font-monospace text-secondary text-center mb-3">Adicionar Propietário</h5>
+                {% include 'alert.html' %}
+                 <div class="row">
+                    <div class="col-sm-4 mb-3">
+                        <label for="nome" class="form-label">Nome: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.name|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="nome" class="form-label">Data de nascimento: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.birth_date|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="sex" class="form-label">Sexo: <span class="text-danger fw-bold">*</span></label><br>
+                        {{ form.sex|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="cpf" class="form-label">CPF: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.cpf|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="telephone" class="form-label">Telefone:</label>
+                        {{ form.telephone|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        {{ form.email|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="zip_code" class="form-label">CEP: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.zip_code|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="state" class="form-label">Estado: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.state|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="city" class="form-label">Cidade: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.city|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="district" class="form-label">Bairro: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.district|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="road" class="form-label">Rua: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.road|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="number" class="form-label">Número:</label>
+                        {{ form.number|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="complement" class="form-label">Complemento:</label>
+                        {{ form.complement|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="reference_point" class="form-label">Ponte de referência:</label>
+                        {{ form.reference_point|as_crispy_field }}
+                    </div>
+                    <div class="col-sm-12 mb-3">
+                        <label for="comments" class="form-label">Observações:</label>
+                        {{ form.comments|as_crispy_field }}
+                    </div>
+                </div> 
+                <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                    <a href="{% url 'owner_index' %}" class="btn btn-outline-dark ">Cancelar</a>
+                    <button type="submit" class="btn btn-dark ">Salvar</button>
+                </div> 
+        </form>
+    </div>
+{% endblock %}  

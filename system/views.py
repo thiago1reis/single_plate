@@ -6,18 +6,23 @@ from django.shortcuts import HttpResponse
 from django.contrib.auth.decorators import login_required
 from system.forms import OwnerForm
 from system.models import Owner
-# Create your views here.
+from django.core.paginator import Paginator
 
-# Função para listar todos os propietários.
+######################################## VIEWS DE PROPIETÁRIOS ########################################
+
+# view para listar todos os propietários.
 @login_required(login_url="/")
 def owner_index(request):
-    owners = Owner.objects.all()
+    owners = Owner.objects.all().order_by('-created')
+    paginator = Paginator(owners, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'owners': owners
+        'page_obj': page_obj
     }
     return render(request, 'system/owner_index.html', context)
 
-# Função para adicionar novos propietários.
+# view para adicionar novos propietários. 
 @login_required(login_url="/")
 def owner_add(request):
     form = OwnerForm(request.POST or None)
@@ -33,10 +38,39 @@ def owner_add(request):
     context = {'form': form }
     return render(request, 'system/owner_add.html', context)
 
+# view para editar um propietário.
+@login_required(login_url="/")
+def owner_edit(request, owner_pk):
+    owner = Owner.objects.get(pk=owner_pk)
+    form = OwnerForm(request.POST or None, instance=owner)
+    try:
+        if request.POST:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Dados do propietário editado com sucesso!')
+                return redirect('owner_index')   
+    except Exception as error:
+        context = {
+            'form': form,
+            'owner': owner.id
+        }
+        messages.error(request, error)
+        return render(request, 'system/owner_edit.html', context,)             
+    context = {
+        'form': form,
+        'owner': owner.id
+    }
+    return render(request, 'system/owner_edit.html', context,)        
 
-# #Função para editar um propietários.
-# def owner_index(request):
-#     return HttpResponse('lista dos propietarios')
+# view para deletar um propietário.
+def autor_delete(request, owner_pk):
+    owner = Owner.objects.get(pk=owner_pk)
+    owner.delete()
+    messages.success(request, 'Propietário deletado com sucesso!')
+    return redirect('owner_index') 
+
+######################################## VIEWS DE PLACAS ########################################    
+
 
 
 
