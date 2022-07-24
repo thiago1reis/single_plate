@@ -22,7 +22,7 @@
                     <td>{{ owner.sex }}</td>
                     <td>{{ owner.cpf }}</td>
                     <td class="">
-                        <a href="" class="me-4 text-dark"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{% url 'owner_show' owner.id %}" class="me-4 text-dark"><i class="fa-solid fa-eye"></i></a>
                         <a href="{% url 'owner_edit' owner.id %}" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
                         <a href="{% url 'owner_delete' owner.id %}" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir esse Propietário ?')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>

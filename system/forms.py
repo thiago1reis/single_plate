@@ -7,9 +7,9 @@ class OwnerForm(forms.ModelForm):
         exclude = ('created', 'modified', 'address_id')
         widgets = {
             'name': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe o nome' ,'autofocus': ''}),
-            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date',}), 
+            'birth_date': forms.DateInput(attrs={'class': 'form-control', 'placeholder': 'dd/mm/aaaa'}), 
             'sex': forms.Select(attrs={'class': 'form-select'}),
-            'cpf': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe o CPF'}),
+            'cpf': forms.TextInput( attrs={'class': 'form-control', 'placeholder': '000.000.000-00'}),
             'telephone': forms.TextInput( attrs={'class': 'form-control', 'placeholder': '(00) 00000-0000'}),
             'email': forms.EmailInput( attrs={'class': 'form-control', 'placeholder': 'nome@email.com'}),
             'zip_code': forms.TextInput( attrs={'class': 'form-control', 'placeholder': '00000-000'}),
@@ -19,7 +19,7 @@ class OwnerForm(forms.ModelForm):
             'road': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe a rua'}),
             'number': forms.NumberInput( attrs={'class': 'form-control', 'placeholder': 'Informe o número da casa'}),
             'complement': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe o complemento'}),
-            'reference_point': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe um ponte de referência'}),
+            'reference_point': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe um ponto de referência'}),
             'comments': forms.Textarea( attrs={'class': 'form-control', 'style': 'height: 100px'})
         }
         labels = {

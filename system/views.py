@@ -38,6 +38,15 @@ def owner_add(request):
     context = {'form': form }
     return render(request, 'system/owner_add.html', context)
 
+# view para visualizar dados de um propietário.
+@login_required(login_url="/")
+def owner_show(request, owner_pk):
+    owner = Owner.objects.get(pk=owner_pk)
+    context = {
+            'owner': owner
+        }
+    return render(request, 'system/owner_show.html', context,)  
+
 # view para editar um propietário.
 @login_required(login_url="/")
 def owner_edit(request, owner_pk):
@@ -63,6 +72,7 @@ def owner_edit(request, owner_pk):
     return render(request, 'system/owner_edit.html', context,)        
 
 # view para deletar um propietário.
+@login_required(login_url="/")
 def autor_delete(request, owner_pk):
     owner = Owner.objects.get(pk=owner_pk)
     owner.delete()

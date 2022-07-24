@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="border p-3 m-3">
+        <h5 class="font-monospace text-secondary text-center mb-3">Dados do Propietário</h5>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td><span class="fw-bold">Nome:</span><br>{{ owner.name }}</td>
+                <td><span class="fw-bold">Data de nascimento:</span><br>{{ owner.birth_date }}</td>
+                <td><span class="fw-bold">Sexo:</span><br>{{ owner.sex }}</td>
+              </tr>
+              <tr>
+                <td><span class="fw-bold">CPF:</span><br>{{ owner.cpf }}</td>
+                <td><span class="fw-bold">Telefone:</span><br>{{ owner.telephone }}</td>
+                <td><span class="fw-bold">Email:</span><br>{{ owner.email }}</td>
+              </tr>
+              <tr>
+                <td><span class="fw-bold">CEP:</span><br>{{ owner.zip_code }}</td>
+                <td><span class="fw-bold">Estado:</span><br>{{ owner.state }}</td>
+                <td><span class="fw-bold">Cidade:</span><br>{{ owner.city }}</td>
+              </tr>
+              <tr>
+                <td><span class="fw-bold">Bairro:</span><br>{{ owner.district }}</td>
+                <td><span class="fw-bold">Rua:</span><br>{{ owner.road }}</td>
+                <td><span class="fw-bold">Número:</span><br>{{ owner.road }}</td>
+              </tr>
+              <tr>
+                <td><span class="fw-bold">Complemento:</span><br>{{ owner.complement }}</td>
+                <td colspan="2"><span class="fw-bold">Ponto de referência:</span><br>{{ owner.reference_point }}</td>
+              </tr>
+              <tr>
+                <td colspan="3"><span class="fw-bold">Observações:</span><br>{{ owner.comments }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+            <a href="{% url 'owner_index' %}" class="btn btn-outline-dark ">Voltar</a>
+        </div>
+        </div>
+    </div>
+{% endblock %}  
