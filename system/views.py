@@ -1,12 +1,12 @@
 from cmath import e
-from multiprocessing import context
+import random
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.contrib.auth.decorators import login_required
 from system.forms import OwnerForm
-from system.models import Owner
+from system.models import Owner, Plate
 from django.core.paginator import Paginator
 
 ######################################## VIEWS DE PROPIETÁRIOS ########################################
@@ -81,14 +81,56 @@ def autor_delete(request, owner_pk):
     return redirect('owner_index') 
 
 ######################################## VIEWS DE PLACAS ######################################## 
-# view para deletar um propietário.    
+
+# view para listar todas as placas.
+@login_required(login_url="/")
+def plate_index(request):
+    plates = Plate.objects.all().order_by('-created')
+    paginator = Paginator(plates, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj
+    }
+    return render(request, 'system/plate_index.html', context)
+
+# view para gerar uma placa.    
 @login_required(login_url="/")
 def plate_add(request):
-    owners = Owner.objects.all().order_by('-name')
-    context = {
-        'owners' : owners
-    }
-    return render(request, 'system/plate_add.html', context)
+    if request.method == "GET":
+        owners = Owner.objects.all().order_by('name')
+        context = {
+            'owners' : owners,
+        }
+        return render(request, 'system/plate_add.html', context)
+    else:
+        try: 
+            plate = Plate()
+            plate.state = request.POST.get('state')
+            plate.type = request.POST.get('type')
+            #gera as três primeira letras a placa
+            plate.three_char = chr(random.randint(ord('a'), ord('z'))) + chr(random.randint(ord('a'), ord('z'))) + chr(random.randint(ord('a'), ord('z')))
+            #gera o primero número da placa  
+            plate.only_number = int(chr(random.randint(ord('0'), ord('9'))))
+            #gera a última letra da placa (essa fica entre os numeros)
+            plate.single_char = chr(random.randint(ord('a'), ord('z')))
+            #gera os dois últimos numeros da placa
+            plate.two_number = int(chr(random.randint(ord('0'), ord('9'))) + chr(random.randint(ord('0'), ord('9')))) 
+            plate.status = True
+            plate.owner = Owner.objects.get(pk=request.POST.get('owner_id'))
+            plate.save()
+            messages.success(request, 'Placa gerada com sucesso!')
+            return redirect('plate_index')
+        except Exception as error:
+            owners = Owner.objects.all().order_by('name')
+            context = {
+                'owners' : owners,
+            }
+            messages.error(request, error)
+            return render(request, 'system/plate_add.html', context,)      
+
+
+    
     
 
 

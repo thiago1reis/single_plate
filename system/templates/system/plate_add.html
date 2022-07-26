@@ -8,8 +8,8 @@
                  <div class="row">
                     <div class="col-sm-4 mb-3">
                         <label for="nome" class="form-label">Propietário: <span class="text-danger fw-bold">*</span></label>
-                        <select class="form-select" required>
-                            <option selected>---------</option>
+                        <select class="form-select" name="owner_id" required>
+                            <option value="" selected disabled>---------</option>
                             {% for owner in owners %}
                             <option value="{{ owner.id }}">{{ owner.name }}</option>
                             {% endfor %}
@@ -17,8 +17,8 @@
                     </div>
                     <div class="col-sm-4 mb-3">
                         <label for="nome" class="form-label">Estado onde reside: <span class="text-danger fw-bold">*</span></label>
-                        <select class="form-select" required>
-                            <option selected>---------</option>
+                        <select class="form-select" name="state" required>
+                            <option value="" selected disabled>---------</option>
                             <option value="Acre">Acre</option>
                             <option value="Alagoas">Alagoas</option>
                             <option value="Amapá">Amapá</option>
@@ -50,8 +50,8 @@
                     </div>
                     <div class="col-sm-4 mb-3">
                         <label for="sex" class="form-label">Tipo da placa: <span class="text-danger fw-bold">*</span></label><br>
-                        <select class="form-select" required>
-                            <option selected>---------</option>
+                        <select class="form-select" name="type" required>
+                            <option value="" selected disabled>---------</option>
                             <option value="Aluguel">Aluguel</option>
                             <option value="Aprendizagem">Aprendizagem</option>
                             <option value="Especial">Especial</option>

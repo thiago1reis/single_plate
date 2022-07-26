@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="border p-3 m-3">
+        <h5 class="font-monospace text-secondary text-center mb-3">Lista de Todas as Placas</h5>
+        {% include 'alert.html' %}
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Propietário</th>
+                    <th scope="col">Placa</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Tipo da Placa</th>
+                    <th scope="col">Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for plate in page_obj %}
+                  <tr>
+                    <td>{{ plate.owner_id }}</td>
+                    <td><span class="text-uppercase">{{ plate.three_char }}-{{ plate.only_number }}{{ plate.single_char }}{{ plate.two_number }}</span></td> 
+                    <td>{% if plate.status %}
+                            <sapan class="text-success"><i class="fa-solid fa-check"></i> Ativa</sapan>
+                        {% else %} 
+                            <sapan class="text-danger"><i class="fa-solid fa-circle-xmark"></i> Desativada</sapan>
+                        {% endif %}
+                    </td>
+                    <td>{{ plate.state }}</td>
+                    <td>{{ plate.type }}</td>
+                    <td class="">
+                        <a href="" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
+                        <a href="" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir essa placa ?')"><i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+             </table>
+          </div>
+          <nav aria-label="Page navigation example ">
+            <ul class="pagination ">
+              {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page=1">&laquo; Primeira</a></li>
+                <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+              {% endif %}
+                <li class="page-item disabled"><span class="page-link text-secondary" >Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span></li>
+              {% if page_obj.has_next %}
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">Próxima</a></li>
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a></li>
+              {% endif %}
+            </ul>
+          </nav>
+    </div>
+{% endblock %}  
