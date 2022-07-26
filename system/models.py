@@ -1,14 +1,38 @@
 from django.db import models
 
 # Create your models here.
+STATE_CHOICES = [
+        ('Acre', 'Acre'),
+        ('Alagoas', 'Alagoas'),
+        ('Amazonas', 'Amazonas'),
+        ('Bahia', 'Ceará'),
+        ('Distrito Federal', 'Distrito Federal'),
+        ('Espírito Santo', 'Espírito Santo'),
+        ('Goiás', 'Goiás'),
+        ('Maranhão', 'Maranhão'),
+        ('Mato Grosso', 'Mato Grosso'),
+        ('Mato Grosso do Sul', 'Mato Grosso do Sul'),
+        ('Minas Gerais', 'Minas Gerais'),
+        ('Pará', 'Pará'),
+        ('Paraíba', 'Paraíba'),
+        ('Paraná', 'Paraná'),
+        ('Pernambuco', 'Pernambuco'),
+        ('Piauí', 'Piauí'),
+        ('Rio de Janeiro', 'Rio de Janeiro'),
+        ('Rio Grande do Norte', 'Rio Grande do Norte'),
+        ('Rio Grande do Sul', 'Rio Grande do Sul'),
+        ('Rondônia', 'Rondônia'),
+        ('Roraima', 'Roraima'),
+        ('Santa Catarina', 'Santa Catarina'),
+        ('São Paulo', 'São Paulo'),
+        ('Sergipe', 'Sergipe'),
+        ('Tocantins', 'Tocantins'),
+    ]
 class Owner(models.Model):
     SEX_CHOICES = [
         ('Feminino', 'Feminino'),
         ('Maculino', 'Maculino'),
         ('Outro', 'Outro')
-    ]
-    STATE_CHOICES = [
-        ('Tocantins', 'Tocantins'),
     ]
     name = models.CharField(max_length=255)
     birth_date = models.DateField()
@@ -17,7 +41,7 @@ class Owner(models.Model):
     telephone = models.CharField(max_length=255, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
     zip_code = models.CharField(max_length=255)
-    state = models.CharField(max_length=15, choices=STATE_CHOICES, blank=False, null=False)
+    state = models.CharField(max_length=25, choices=STATE_CHOICES, blank=False, null=False)
     city = models.CharField(max_length=255)
     district = models.CharField(max_length=255)
     road = models.CharField(max_length=255)
@@ -31,7 +55,7 @@ class Owner(models.Model):
         return self.nome
 
 class Plate(models.Model):
-    state = models.CharField(max_length=255)
+    state = models.CharField(max_length=25, choices=STATE_CHOICES, blank=False, null=False)
     type = models.CharField(max_length=255)
     three_char = models.CharField(max_length=255)
     only_number = models.IntegerField()

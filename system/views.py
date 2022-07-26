@@ -1,4 +1,5 @@
 from cmath import e
+from multiprocessing import context
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.shortcuts import render
@@ -79,8 +80,16 @@ def autor_delete(request, owner_pk):
     messages.success(request, 'Propietário deletado com sucesso!')
     return redirect('owner_index') 
 
-######################################## VIEWS DE PLACAS ########################################    
-
+######################################## VIEWS DE PLACAS ######################################## 
+# view para deletar um propietário.    
+@login_required(login_url="/")
+def plate_add(request):
+    owners = Owner.objects.all().order_by('-name')
+    context = {
+        'owners' : owners
+    }
+    return render(request, 'system/plate_add.html', context)
+    
 
 
 
