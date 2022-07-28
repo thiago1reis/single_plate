@@ -1,3 +1,0 @@
-static/* linguist-vendored
-igle_plate/static/* linguist-vendored
-sigle_plate/templates/* linguist-vendored
