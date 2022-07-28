@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %} 
+{% block content %}
+    <div class="border p-3 m-3">
+        <form action="{% url 'vehicle_add' %}" method="POST">  
+                {% csrf_token %}
+                <h5 class="font-monospace text-secondary text-center mb-3">Adicionar Veículo</h5>
+                {% include 'alert.html' %}
+                 <div class="row">
+                    <div class="col-sm-3 mb-3">
+                        <label for="brand_vehicle" class="form-label">Marca: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.brand_vehicle|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label for="model_vehicle" class="form-label">Modelo: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.model_vehicle|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label for="model_year" class="form-label">Ano do Modelo: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.model_year|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-3 mb-3">
+                        <label for="year_manufacture" class="form-label">Ano de Fabricação: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.year_manufacture|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="chassis" class="form-label">Chassi: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.chassis|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="type" class="form-label">Tipo do Veículo: <span class="text-danger fw-bold">*</span></label><br>
+                        {{ form.type|as_crispy_field }} 
+                    </div>
+                    <div class="col-sm-4 mb-3">
+                        <label for="color" class="form-label">Cor: <span class="text-danger fw-bold">*</span></label>
+                        {{ form.color|as_crispy_field }} 
+                    </div>
+                </div> 
+                <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                    <button type="submit" class="btn btn-dark ">Salvar</button>
+                </div> 
+        </form>
+    </div>
+{% endblock %}  

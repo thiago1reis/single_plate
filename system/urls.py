@@ -15,7 +15,10 @@ urlpatterns = [
     path('placa/gerar', views.plate_add, name="plate_add"),
     path('placa/editar/<int:plate_pk>', views.plate_edit, name='plate_edit'),
     path('placa/deletar/<int:plate_pk>', views.plate_delete, name='plate_delete'), 
-    #urls veículos 
-    
+    #urls veículos
+    path('veiculos', views.vehicle_index, name='vehicle_index'),    
+    path('veiculo/novo', views.vehicle_add, name="vehicle_add"),
+    path('veiculo/editar/<int:vehicle_pk>', views.vehicle_edit, name='vehicle_edit'),
+    path('veiculo/deletar/<int:vehicle_pk>', views.vehicle_delete, name='vehicle_delete'),
 ] 
  

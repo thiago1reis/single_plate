@@ -1,5 +1,5 @@
 from django import forms
-from system.models import Owner
+from system.models import Owner, Vehicle
 
 class OwnerForm(forms.ModelForm):
     class Meta:
@@ -40,6 +40,29 @@ class OwnerForm(forms.ModelForm):
             'comments': ""
         }
  
+class VehicleForm(forms.ModelForm):
+    class Meta:
+        model = Vehicle
+        exclude = ('created', 'modified')
+        widgets = {
+            'brand_vehicle': forms.TextInput( attrs={'class': 'form-control', 'placeholder': 'Informe a marca do veículo' ,'autofocus': ''}),
+            'model_vehicle': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Informe o modelo do veículo'}), 
+            'model_year': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe o ano modelo do veículo'}), 
+            'year_manufacture': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Informe o ano de fabricação do veículo'}), 
+            'chassis': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Informe o chassi do veículo'}), 
+            'type': forms.Select(attrs={'class': 'form-select'}),
+            'color': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Informe a cor do veículo'}), 
+        }
+        labels = {
+            'brand_vehicle': "",
+            'model_vehicle': "",
+            'model_year': "",
+            'year_manufacture': "",
+            'chassis': "",
+            'type': "",
+            'color': ""
+        }
+
 
    
   

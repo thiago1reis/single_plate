@@ -5,8 +5,8 @@ from django.shortcuts import redirect
 from django.shortcuts import render
 from django.shortcuts import HttpResponse
 from django.contrib.auth.decorators import login_required
-from system.forms import OwnerForm
-from system.models import Owner, Plate
+from system.forms import OwnerForm, VehicleForm
+from system.models import Owner, Plate, Vehicle
 from django.core.paginator import Paginator
 
 ######################################## VIEWS DE PROPIETÁRIOS ########################################
@@ -166,7 +166,68 @@ def plate_delete(request, plate_pk):
     messages.success(request, 'Placa deletada com sucesso!')
     return redirect('plate_index')             
                
-######################################## VIEWS DE VEÍCULOS ########################################     
+######################################## VIEWS DE VEÍCULOS ######################################## 
+
+# view para listar todos os veículos.
+@login_required(login_url="/")
+def vehicle_index(request):
+    vehicles = Vehicle.objects.all().order_by('-created')
+    paginator = Paginator(vehicles, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj': page_obj
+    }
+    return render(request, 'system/vehicle_index.html', context)
+
+# view para adicionar novos veículos.    
+@login_required(login_url="/")
+def vehicle_add(request):
+    form = VehicleForm(request.POST or None)
+    try:
+        if request.POST:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Veículo adicionado com sucesso!')
+                return redirect('vehicle_index')
+    except Exception as error:
+        messages.error(request, error)
+        return redirect('vehicle_add')
+    context = {'form': form }
+    return render(request, 'system/vehicle_add.html', context)
+
+# view para editar um veículo.
+@login_required(login_url="/")
+def vehicle_edit(request, vehicle_pk):
+    vehicle = Vehicle.objects.get(pk=vehicle_pk)
+    form = VehicleForm(request.POST or None, instance=vehicle)
+    try:
+        if request.POST:
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Dados do veículo editado com sucesso!')
+                return redirect('vehicle_index')   
+    except Exception as error:
+        context = {
+            'form': form,
+            'vehicle': vehicle.id
+        }
+        messages.error(request, error)
+        return render(request, 'system/vehicle_edit.html', context,)             
+    context = {
+        'form': form,
+        'vehicle': vehicle.id
+    }
+    return render(request, 'system/vehicle_edit.html', context,)      
+
+# view para deletar um veículo.
+@login_required(login_url="/")
+def vehicle_delete(request, vehicle_pk):
+    vehicle = Vehicle.objects.get(pk=vehicle_pk)
+    vehicle.delete()
+    messages.success(request, 'Veiculo deletado com sucesso!')
+    return redirect('vehicle_index')  
+
 
 
 

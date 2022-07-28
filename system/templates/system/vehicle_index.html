@@ -1,32 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="border p-3 m-3">
-        <h5 class="font-monospace text-secondary text-center mb-3">Lista de Todos os Propietário</h5>
+        <h5 class="font-monospace text-secondary text-center mb-3">Lista de Todos as Veículos</h5>
         {% include 'alert.html' %}
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Data de Nascimento</th>
-                    <th scope="col">Sexo</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">E-mail</th>
+                    <th scope="col">Marca</th>
+                    <th scope="col">Modelo</th>
+                    <th scope="col">Ano do Modelo</th>
+                    <th scope="col">Ano de Fabricação</th>
+                    <th scope="col">Chassi</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Cor</th>
                     <th scope="col">Ações</th>
                   </tr>
                 </thead>
                 <tbody>
-                {% for owner in page_obj %}
+                {% for vehicle in page_obj %}
                   <tr>
-                    <td>{{ owner.name }}</td> 
-                    <td>{{ owner.birth_date|date:"d/m/Y" }}</td>
-                    <td>{{ owner.sex }}</td>
-                    <td>{{ owner.telephone }}</td>
-                    <td>{{ owner.email }}</td>
+                    <td>{{ vehicle.brand_vehicle }}</td>
+                    <td>{{ vehicle.model_vehicle }}</td>
+                    <td>{{ vehicle.model_year }}</td>
+                    <td>{{ vehicle.year_manufacture }}</td>
+                    <td>{{ vehicle.chassis }}</td>
+                    <td>{{ vehicle.type }}</td>
+                    <td>{{ vehicle.color }}</td>
                     <td class="">
-                        <a href="{% url 'owner_show' owner.id %}" class="me-4 text-dark"><i class="fa-solid fa-eye"></i></a>
-                        <a href="{% url 'owner_edit' owner.id %}" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
-                        <a href="{% url 'owner_delete' owner.id %}" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir esse Propietário ?')"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="{% url 'vehicle_edit' vehicle.id %}" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
+                        <a href="{% url 'vehicle_delete' vehicle.id %}" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir esse veículo ?')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                   </tr>
                 {% endfor %}

@@ -28,12 +28,32 @@ STATE_CHOICES = [
         ('Sergipe', 'Sergipe'),
         ('Tocantins', 'Tocantins'),
     ]
-class Owner(models.Model):
-    SEX_CHOICES = [
+
+SEX_CHOICES = [
         ('Feminino', 'Feminino'),
         ('Maculino', 'Maculino'),
         ('Outro', 'Outro')
     ]
+
+TYPE_VEHICLE_CHOICES = [
+        ('Automóvel', 'Automóvel'),
+        ('Caminhão', 'Caminhão'),
+        ('Caminhão trator', 'Caminhão trator'),
+        ('Caminhonete', 'Caminhonete'),
+        ('Camioneta', 'Camioneta'),
+        ('Ciclomotor', 'Ciclomotor'),
+        ('Micro-ônibus', 'Micro-ônibus'),
+        ('Motocicleta', 'Motocicleta'),
+        ('Motoneta', 'Motoneta'),
+        ('Ônibus', 'Ônibus'),
+        ('Quadriciclo', 'Quadriciclo'),
+        ('Reboque', 'Reboque'),
+        ('Semirreboque', 'Semirreboque'),
+        ('Triciclo', 'Triciclo'),
+        ('Utilitário', 'Utilitário')
+    ]
+    
+class Owner(models.Model):
     name = models.CharField(max_length=255)
     birth_date = models.DateField()
     sex = models.CharField(max_length=10, choices=SEX_CHOICES, blank=False, null=False)
@@ -53,7 +73,6 @@ class Owner(models.Model):
     modified = models.DateTimeField('modified', auto_now=True)
     def __str__(self):
         return self.nome
-
 class Plate(models.Model):
     state = models.CharField(max_length=25, choices=STATE_CHOICES, blank=False, null=False)
     type = models.CharField(max_length=255)
@@ -66,18 +85,18 @@ class Plate(models.Model):
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
    
-
 class Vehicle(models.Model):
     brand_vehicle = models.CharField(max_length=255)
     model_vehicle = models.CharField(max_length=255)
     model_year = models.IntegerField()
     year_manufacture = models.IntegerField()
     chassis = models.CharField(max_length=255)
-    type = models.CharField(max_length=255)
+    type = models.CharField(max_length=255, choices=TYPE_VEHICLE_CHOICES, blank=False, null=False)
     color = models.CharField(max_length=255)
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
-
+    def __str__(self):
+        return self.nome
 class Register(models.Model):
     plate = models.ForeignKey(Plate, on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
