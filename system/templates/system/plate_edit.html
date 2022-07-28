@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="border p-3 m-3">
+        <form action="{% url 'plate_edit' plate.id %}" method="POST">  
+                {% csrf_token %}
+                <h5 class="font-monospace text-secondary text-center mb-3">Editar Placa</h5>
+                {% include 'alert.html' %}
+                 <div class="row">
+                    <div class="col-sm-4 mb-3">
+                        <label for="owner_id" class="form-label">Propietário:</label>
+                        <select class="form-select" name="owner_id" disabled>
+                            <option value={{ plate.owner_id }} selected >{{ plate.owner.name }}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 mb-3">
+                        <label for="" class="form-label">Placa:</span></label>
+                        <input type="text" name="" class="form-control text-uppercase" value={{ plate.three_char }}-{{ plate.only_number }}{{ plate.single_char }}{{ plate.two_number }} disabled>
+                    </div>
+                    <div class="col-sm-2 text-center mb-3">
+                        <label for="status" class="form-check-label mt-5" >
+                            <input class="form-check-input " type="checkbox" id="status" name="status" {% if plate.status == 1 %} checked {% endif %} > 
+                            Placa Ativa
+                        </label>
+                    </div>
+                    <div class="col-sm-2 mb-3">
+                        <label for="state" class="form-label">Estado onde reside: <span class="text-danger fw-bold">*</span></label>
+                        <select class="form-select" name="state" required >
+                            <option {% if plate.state == "Acre" %} value="Acre" selected{% endif %}>Acre</option>
+                            <option {% if plate.state == "Alagoas" %} value="Alagoas" selected{% endif %}>Alagoas</option>
+                            <option {% if plate.state == "Amapá" %} value="Amapá" selected{% endif %}>Amapá</option>
+                            <option {% if plate.state == "Amazonas" %} value="Amazonas" selected{% endif %}>Amazonas</option>
+                            <option {% if plate.state == "Bahia" %} value="Bahia" selected{% endif %}>Bahia</option>
+                            <option {% if plate.state == "Ceará" %} value="Ceará" selected{% endif %}>Ceará</option>
+                            <option {% if plate.state == "Distrito Federal" %} value="Distrito Federal" selected{% endif %}>Distrito Federal</option>
+                            <option {% if plate.state == "Espírito Santo" %} value="Espírito Santo" selected{% endif %}>Espírito Santo</option>
+                            <option {% if plate.state == "Goiás" %} value="Goiás" selected{% endif %}>Goiás</option>
+                            <option {% if plate.state == "Maranhão" %} value="Maranhão" selected{% endif %}>Maranhão</option>
+                            <option {% if plate.state == "Mato Grosso" %} value="Mato Grosso" selected{% endif %}>Mato Grosso</option>
+                            <option {% if plate.state == "Mato Grosso do Sul" %} value="Mato Grosso do Sul" selected{% endif %}>Mato Grosso do Sul</option>
+                            <option {% if plate.state == "Minas Gerais" %} value="Minas Gerais" selected{% endif %}>Minas Gerais</option>
+                            <option {% if plate.state == "Pará" %} value="Pará" selected{% endif %}>Pará</option>
+                            <option {% if plate.state == "Paraíba" %} value="Paraíba" selected{% endif %}>Paraíba</option>
+                            <option {% if plate.state == "Paraná" %} value="Paraná" selected{% endif %}>Paraná</option>
+                            <option {% if plate.state == "Pernambuco" %} value="Pernambuco" selected{% endif %}>Pernambuco</option>
+                            <option {% if plate.state == "Piauí<" %} value="Piauí<" selected{% endif %}>Piauí</option>
+                            <option {% if plate.state == "Rio de Janeiro" %} value="Rio de Janeiro" selected{% endif %}>Rio de Janeiro</option>
+                            <option {% if plate.state == "Rio Grande do Norte" %} value="Rio Grande do Norte" selected{% endif %}>Rio Grande do Norte</option>
+                            <option {% if plate.state == "Rio Grande do Sul" %} value="Rio Grande do Sul" selected{% endif %}>Rio Grande do Sul</option>
+                            <option {% if plate.state == "Rondônia" %} value="Rondônia" selected{% endif %}>Rondônia</option>
+                            <option {% if plate.state == "Roraima" %} value="Roraima" selected{% endif %}>Roraima</option>
+                            <option {% if plate.state == "Santa Catarina" %} value="Santa Catarina" selected{% endif %}>Santa Catarina</option>
+                            <option {% if plate.state == "São Paulo" %} value="São Paulo" selected{% endif %}>São Paulo</option>
+                            <option {% if plate.state == "Sergipe" %} value="Sergipe" selected{% endif %}>Sergipe</option>
+                            <option {% if plate.state == "Tocantins" %} value="Tocantins" selected{% endif %}>Tocantins</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 mb-3">
+                        <label for="type" class="form-label">Tipo da placa: <span class="text-danger fw-bold">*</span></label><br>
+                        <select class="form-select" name="type" required>
+                            <option {% if plate.type == "Aluguel" %} value="Aluguel" selected{% endif %}>Aluguel</option>
+                            <option {% if plate.type == "Aprendizagem" %} value="Aprendizagem" selected{% endif %}>Aprendizagem</option>
+                            <option {% if plate.type == "Especial" %} value="Especial" selected{% endif %}>Especial</option>
+                            <option {% if plate.type == "Oficial" %} value="Oficial" selected{% endif %}>Oficial</option>
+                            <option {% if plate.type == "Particular" %} value="Particular" selected{% endif %}>Particular</option>
+                            <option {% if plate.type == "Presidência" %} value="Presidência" selected{% endif %}>Presidência</option>
+                            <option {% if plate.type == "Representantes" %} value="Representantes" selected{% endif %}>Representantes</option>
+                            <option {% if plate.type == "Teste" %} value="Teste" selected{% endif %}>Teste</option>
+                        </select>
+                    </div>
+                </div> 
+                <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                    <a href="{% url 'plate_index' %}" class="btn btn-outline-dark ">Cancelar</a>
+                    <button type="submit" class="btn btn-dark ">Salvar</button>
+                </div> 
+        </form>
+    </div>
+{% endblock %}  

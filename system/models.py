@@ -65,6 +65,7 @@ class Plate(models.Model):
     owner = models.ForeignKey(Owner, on_delete=models.CASCADE)
     created = models.DateTimeField('created', auto_now_add=True)
     modified = models.DateTimeField('modified', auto_now=True)
+   
 
 class Vehicle(models.Model):
     brand_vehicle = models.CharField(max_length=255)

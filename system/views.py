@@ -74,7 +74,7 @@ def owner_edit(request, owner_pk):
 
 # view para deletar um propietário.
 @login_required(login_url="/")
-def autor_delete(request, owner_pk):
+def owner_delete(request, owner_pk):
     owner = Owner.objects.get(pk=owner_pk)
     owner.delete()
     messages.success(request, 'Propietário deletado com sucesso!')
@@ -127,10 +127,46 @@ def plate_add(request):
                 'owners' : owners,
             }
             messages.error(request, error)
-            return render(request, 'system/plate_add.html', context,)      
+            return render(request, 'system/plate_add.html', context,) 
 
+# view para editar uma placa. 
+@login_required(login_url="/")
+def plate_edit(request, plate_pk):
+    if request.method == "GET":
+        plate = Plate.objects.get(pk=plate_pk)
+        context = {
+            'plate': plate
+        }
+        return render(request, 'system/plate_edit.html', context)
+    else:
+        try:
+            plate = Plate.objects.get(pk=plate_pk)
+            if request.POST.get('status'): 
+                plate.status = True 
+            else:
+                plate.status = False  
+            plate.state = request.POST.get('state')
+            plate.type = request.POST.get('type')
+            plate.save()
+            messages.success(request, 'Dados da placa editados com sucesso!')
+            return redirect('plate_index')
+        except Exception as error:
+            plate = Plate.objects.get(pk=plate_pk)
+            context = {
+                'plate': plate
+            }
+            messages.error(request, error)
+            return render(request, 'system/plate_edit.html', context)
 
-    
+# view para deletar um propietário.
+@login_required(login_url="/")
+def plate_delete(request, plate_pk):
+    plate = Plate.objects.get(pk=plate_pk)
+    plate.delete()
+    messages.success(request, 'Placa deletada com sucesso!')
+    return redirect('plate_index')             
+            
+            
     
 
 

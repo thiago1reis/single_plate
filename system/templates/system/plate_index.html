@@ -18,7 +18,7 @@
                 <tbody>
                 {% for plate in page_obj %}
                   <tr>
-                    <td>{{ plate.owner_id }}</td>
+                    <td>{{ plate.owner.name }}</td>
                     <td><span class="text-uppercase">{{ plate.three_char }}-{{ plate.only_number }}{{ plate.single_char }}{{ plate.two_number }}</span></td> 
                     <td>{% if plate.status %}
                             <sapan class="text-success"><i class="fa-solid fa-check"></i> Ativa</sapan>
@@ -29,8 +29,8 @@
                     <td>{{ plate.state }}</td>
                     <td>{{ plate.type }}</td>
                     <td class="">
-                        <a href="" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
-                        <a href="" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir essa placa ?')"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="{% url 'plate_edit' plate.id %}" class="me-4 text-dark"><i class="fa-solid fa-pen-to-square "></i></a>  
+                        <a href="{% url 'plate_delete' plate.id %}" class="me-4 text-dark" onclick="return confirm('Tem certeza que deseja excluir essa placa ?')"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                   </tr>
                 {% endfor %}

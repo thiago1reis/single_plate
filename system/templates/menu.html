@@ -14,7 +14,7 @@
             {% if user.is_authenticated %}
                 <ul class="navbar-nav me-auto mb-lg-0">
                     <li class="nav-item px-1">
-                        <a class="nav-link" aria-current="page" href="{% url 'sistema' %}">Painel</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'sistema' %}"><i class="fa-solid fa-desktop"></i> Painel</a>
                     </li>
                     <li class="nav-item dropdown px-1">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -41,11 +41,17 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" href="">Listar Veículos</a></li>
                           <li><a class="dropdown-item" href="">Adicionar Novo Veículo</a></li>
-                          <li><a class="dropdown-item" href="">Registrar Veículo</a></li>
+                          
                         </ul>
                     </li>
-                    <li class="nav-item px-1">
-                        <a class="nav-link" href="">Relatórios</a>
+                    <li class="nav-item dropdown px-1">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Registros
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="">Ver Registros</a></li>
+                          <li><a class="dropdown-item" href="">Registrar Veículo</a></li>
+                        </ul>
                     </li>
                 </ul>
                 <div class="d-flex">
