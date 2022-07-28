@@ -165,9 +165,8 @@ def plate_delete(request, plate_pk):
     plate.delete()
     messages.success(request, 'Placa deletada com sucesso!')
     return redirect('plate_index')             
-            
-            
-    
+               
+######################################## VIEWS DE VEÍCULOS ########################################     
 
 
 

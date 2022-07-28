@@ -1,29 +1,53 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="row border p-3 m-3 text-center fs-1"> 
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-regular fa-rectangle-list"></i>
-        </div> 
-        <div class="col-sm-6 col-md-4 col-lg-3 ">
-            <i class="fa-solid fa-user-plus"></i>
+    <div class="row border p-3 m-3 text-center "> 
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="{% url 'owner_index' %}">
+                <i class="fa-regular fa-rectangle-list fs-3"></i><br>
+                <span>Listar Propietários</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-regular fa-rectangle-list"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="{% url 'owner_add' %}">
+                <i class="fa-solid fa-user-plus fs-3"></i><br>
+                <span>Adicionar Propietários</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3 ">
-            <i class="fa-solid fa-car-rear"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="{% url 'plate_index' %}">
+                <i class="fa-regular fa-rectangle-list fs-3"></i><br>
+                <span>Listar Placas</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-regular fa-rectangle-list"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="{% url 'plate_add' %}">
+                <i class="fa-solid fa-car-rear fs-3"></i><br>
+                <span>Gerar Nova Placa</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-solid fa-car"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="">
+                <i class="fa-solid fa-car fs-3"></i><br>
+                <span>Adicionar Novo Veículo</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-solid fa-car-side"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="">
+                <i class="fa-regular fa-rectangle-list fs-3"></i><br>
+                <span>Listar Veículos</span>
+            </a>
         </div>
-        <div class="col-sm-6 col-md-4 col-lg-3">
-            <i class="fa-solid fa-file-lines"></i>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="">
+                <i class="fa-solid fa-car-side fs-3"></i><br>
+                <span>Registrar Veículo</span>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3 my-4">
+            <a class="nav-link text-secondary" href="">
+                <i class="fa-solid fa-file-lines fs-3"></i><br>
+                <span>Ver Registros</span>
+            </a>
         </div>
     </div>  
 {% endblock %}  
